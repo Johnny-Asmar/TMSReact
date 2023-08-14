@@ -16,19 +16,15 @@ import {
   GridRowEditStopReasons,
 } from '@mui/x-data-grid';
 import {
-  randomCreatedDate,
-  randomTraderName,
   randomId,
-  randomArrayItem,
 } from '@mui/x-data-grid-generator';
-import styled from 'styled-components';
 
 function EditToolbar(props) {
   const { setRows, setRowModesModel } = props;
 
   const handleClick = () => {
     const id = randomId();
-    setRows((oldRows) => [...oldRows, { id, name: '', age: '', isNew: true }]);
+    setRows((oldRows) => [...oldRows, { id, isNew: true }]);
     setRowModesModel((oldModel) => ({
       ...oldModel,
       [id]: { mode: GridRowModes.Edit, fieldToFocus: 'name' },
@@ -68,17 +64,10 @@ const FullFeaturedCrudGrid = () => {
       })
       .catch(error => console.error('Error fetching data:', error));
   }, []);
- // Arrange the name of users in an array
-
-
-
-
   useEffect(() => {
     console.log('use effect 1')
     setRows(data)
   }, [data])
-
-
 
   const handleRowEditStop = (params, event) => {
     if (params.reason === GridRowEditStopReasons.rowFocusOut) {
@@ -192,14 +181,7 @@ async function processRowUpdate(newRow) {
 
 
   const columns = [
-    { field: 'title', headerName: 'Title', width: 180, editable: true },
-    {
-      field: 'description',
-      headerName: 'Description',
-      width: 220,
-      editable: true,
-    },
-
+    { field: 'title', headerName: 'Title', width: 220, editable: true },
     {
       field: 'name',
       headerName: 'Assigned To',
@@ -211,9 +193,9 @@ async function processRowUpdate(newRow) {
     {
       field: 'endDate',
       headerName: 'End Date',
+      width: 220,
       type: 'date',
       editable: true,
-      // minDate: new Date(),
       valueGetter: (params) => new Date(params.value),
     },
     {
@@ -223,6 +205,12 @@ async function processRowUpdate(newRow) {
       editable: true,
       type: 'singleSelect',
       valueOptions: ['Ready', 'Occuring', 'Unready'],
+    },
+    {
+      field: 'description',
+      headerName: 'Description',
+      width: 220,
+      editable: true,
     },
     {
       field: 'actions',
@@ -271,9 +259,6 @@ async function processRowUpdate(newRow) {
       },
     },
   ];
-
-  const TableContent = styled.div``
-
 
   return (
       <Box
