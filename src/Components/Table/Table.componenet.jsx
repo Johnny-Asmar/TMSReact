@@ -144,7 +144,13 @@ async function processRowUpdate(newRow) {
 
         console.log('response', response.data);
       })
-      .catch(error => alert('Error fetching data:', error));
+      .catch(error => {
+        if (error.response.status === 500) {
+          alert(error.response.data);
+        }
+        else
+        alert(error)
+      });
       return newRow;
     } 
     else{
@@ -169,7 +175,13 @@ async function processRowUpdate(newRow) {
 
         console.log('response', response.data);
       })
-      .catch(error => alert('Error fetching data:', error));
+      .catch(error => {
+        if (error.response.status === 500) {
+          alert(error.response.data);
+        }
+        else
+        alert(error)
+      });
     return updatedRow;
   };
     }
@@ -196,7 +208,7 @@ async function processRowUpdate(newRow) {
       width: 220,
       type: 'date',
       editable: true,
-      valueGetter: (params) => new Date(params.value),
+      valueGetter: (params) => new Date(params.value)
     },
     {
       field: 'status',

@@ -45,7 +45,6 @@ const SignIn = () => {
         navigate('/TMSUser');
         else
         navigate('/TMSAdmin');
-        
       })
       .catch(error => alert('Error fetching data:', error));
   };
